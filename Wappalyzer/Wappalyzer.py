@@ -128,7 +128,16 @@ class WebPage:
         html = await response.text() 
         return cls(response.url, html=html, headers=response.headers)
 
-
+    @classmethod
+    def get_raw_response(self):
+        """
+        Just returns the parsed html and headers provided by
+        `BeautifulSoup` module. This is for compatibility with
+        third-party tools and designed to avoid unecessary
+        additional requests.
+        """
+        return(self, self.url, self.html, self.headers)
+        
 class Wappalyzer:
     """
     Python Wappalyzer driver.
